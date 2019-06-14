@@ -1,0 +1,18 @@
+<section class="bag">
+    <h2 class="bag__title">Корзина</h2>
+    <h4 [hidden]="!visibility">Ваша коризна пуста, перейти в <a routerLink="/all-books">каталог</a>?</h4>
+    <div class="bag__catalog">
+         <div class="bagBook" *ngFor="let book of bag">
+            <h3 class="book__title">{{ book.name }}</h3>
+            <p class="book__info">{{ book.description }}</p>
+            <p class="book__price">Цена: {{ book.price * book.value }}$</p>
+            <div>
+                <span>Количество:</span>
+                <input class="quantity" (change)="changePrice(book, value.value)" type="number" change value={{book.value}} #value/>
+            </div>
+        </div>
+    </div>
+    <div class="bag__clear">
+        <button (click)="clearBag()">Очистить корзину</button>
+    </div>
+</section>

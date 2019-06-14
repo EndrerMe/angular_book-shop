@@ -1,0 +1,11 @@
+<header>
+  <div class="logo">
+    <h1>
+      <a routerLink="/all-books">Book Shop</a>
+    </h1>
+  </div>
+  <div class="user" [style.display]="visibility==true?'flex' : 'none'">
+    <h3 (click)="toUserArea()">{{ userName }}</h3>
+    <span class="logout" (click)="logout()">Выйти</span>
+  </div>
+</header>

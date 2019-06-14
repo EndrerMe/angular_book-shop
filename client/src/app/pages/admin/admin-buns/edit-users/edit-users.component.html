@@ -1,0 +1,128 @@
+<section class="editUser">
+  <button (click)="modalNewUser()" class="btn btn-info">Добавить нового пользователя</button>
+  <div class="allUsers" *ngFor="let user of users
+  |paginate: {
+    id: 'server',
+    itemsPerPage: 5,
+    currentPage: page,
+    totalItems: total
+  }">
+    <div class="user">
+      <h4 class="user__name">{{ user.userName }}</h4>
+      <span class="user__delete" 
+      (click)="deleteUser(user)"
+      *ngIf="user.id !== activeUser">Удалить</span>
+      <span class="user__Show" (click)="showUserInfo(user.id)">Показать</span>
+    </div>
+    <div class="userInfo" [hidden]="visibility !== user.id">
+      <h4 class="userInfo__name">Имя пользователя: {{ user.userName }}</h4>
+      <p class="userInfo__email">Почта польователя: {{ user.userEmail }}</p>
+      <p class="userInfo__genre">Пол пользователя: {{ user.userGender }}</p>
+      <p class="userInfo__role">Роль пользователя: {{ user.userRole }}</p>
+      <span class="changeuUser" (click)="modalChangeUser(user)">Изменить</span>
+    </div>
+  </div>
+  <div class="modal" [hidden]="modalVisibility !== true">
+    <div class="modal__main">
+      <div class="main">
+        <div class="close" (click)="closeModal()">
+          <span class="clos__line"></span>
+        </div>
+        <form (submit)="changeUserData(repeatPass.value)" [formGroup]="changeForm">
+          <div class="form-group form__el">
+            <input formControlName="userName" type="text" placeholder="Имя">
+          </div>
+          <div class="form-group form__el">
+            <input formControlName="userEmail" type="email" placeholder="Email">
+          </div>
+          <div class="form-group form__el">
+            <div class="form-group form__el">
+              <input formControlName="userPassword" type="text" placeholder="Новый пароль">
+            </div>
+            <div class="form-group form__el">
+              <input type="text" placeholder="Повторите пароль" #repeatPass>
+            </div>
+          </div>
+          <div class="form-group form__el" *ngFor="let gender of userGender">
+            <div>
+              <label for="gender">{{ gender }}</label>
+              <input class="genre__btn" value="{{ gender }}" 
+              id="gender" type="radio" name="gender" 
+              checked="checked" (change)="radioGengre($event)">
+            </div>
+          </div>
+          <div class="form-group form__el">
+            <div>
+              <select name="userRoles" formControlName="userRole">
+                <option *ngFor="let role of userRoles" value="{{ role }}">
+                  {{ role }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <button type="submit">Изменить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal" [hidden]="modalNewUserVisibility !== true">
+    <div class="main">
+        <div class="close" (click)="closeModalNewUser()">
+          <span class="clos__line"></span>
+        </div>
+        <form [formGroup]="registForm" 
+        (submit)="addNewUser(repeatPassword.value)">
+          <div class="form-group form__el">
+            <input class="user__info" formControlName="userName" name="userName" type="text" placeholder="Ваше Имя..." #userName>
+            <div class="alert alert-danger"
+            *ngIf="registForm.controls.userName.errors?.required && registForm.controls.userName.touched && !submited">
+              <span class="alert__txt">Имя должно содержать минимум 
+                1 символов и максимум 15 символов</span>
+            </div>
+          </div>
+          <div class="form-group form__el">
+            <input class="user__info" formControlName="userEmail" name="userEmail" type="email" placeholder="Email" required #userEmail>
+            <div class="alert alert-danger"
+            *ngIf="registForm.controls.userEmail.errors?.required && registForm.controls.userEmail.touched && !submited">
+              <span>Почта указана не верно</span>
+            </div>
+          </div>
+          <div class="form-group form__el">
+            <input class="user__info" formControlName="userPassword" name="userPassword" type="password" placeholder="Пароль">
+            <div class="alert alert-danger"
+            *ngIf="registForm.controls.userPassword.errors?.required && registForm.controls.userPassword.touched && !submited">
+              <span>Минимальная длина 8 символов,
+                пароль должен состоять из букв и цифр
+              </span>
+            </div>
+          </div>
+          <div class="form-group form__el">
+            <input class="user__info" name="userRepeatPass" type="password" placeholder="Повторите пароль" #repeatPassword>
+          </div>
+          <div class="form-group form__el" *ngFor="let gender of userGender">
+            <div>
+                <label for="gender">{{ gender }}</label>
+                <input class="genre__btn" value="{{ gender }}" 
+                id="gender" type="radio" name="gender" 
+                checked="checked" (change)="radioGengre($event)">
+            </div>
+          </div>
+          <div class="form-group form-el">
+            <div>
+              <select name="userRoles" formControlName="userRole">
+                <option *ngFor="let role of userRoles" value="{{ role }}">
+                  {{ role }}
+                </option>
+              </select>
+            </div>
+            <div class="alert alert-danger"
+              *ngIf="userRoles.touched && userRoles.invalid">
+                <span>Выберите роль</span>
+            </div>
+          </div>
+          <input type="submit" value="Добавить">
+        </form>
+    </div>
+  </div>
+  <pagination-controls id="server" (pageChange)="getPage($event)"></pagination-controls>
+</section>

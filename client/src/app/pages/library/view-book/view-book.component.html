@@ -1,0 +1,18 @@
+<section class="bookView">
+  <h2 class="bookView__title">{{ book.name }}</h2>
+  <p class="bookView__info">{{ book.description }}</p>
+  <p class="bookView__type">Тип: {{ book.type }}</p>
+  <p class="bookView__price">Цена: {{ book.price }}$</p>
+  <p class="bookView__author" 
+  *ngFor="let author of book.authors">Автора: <span>{{ author.name }}, </span></p>
+  <button (click)="addToBag(book)">Добавить в корзину</button>
+</section>
+
+
+
+
+<!-- <app-header></app-header>
+<app-navigation></app-navigation>
+<main class="">
+  <router-outlet></router-outlet>
+</main> -->

@@ -1,0 +1,59 @@
+<section class="regist">
+    <form [formGroup]="registForm" 
+    (submit)="addNewUser(repeatPass.value)">
+      <div class="form-group form__el">
+        <label>Ваше Имя:</label>
+        <input class="user__info" formControlName="userName" name="userName" type="text" placeholder="Ваше Имя..." #userName>
+        <div class="alert alert-danger"
+        *ngIf="registForm.controls.userName.errors?.required && registForm.controls.userName.touched && !submited">
+          <span class="alert__txt">Имя должно содержать минимум 
+            1 символов и максимум 15 символов</span>
+        </div>
+      </div>
+      <div class="form-group form__el">
+        <label>Почта:</label>
+        <input class="user__info" formControlName="userEmail" name="userEmail" type="email" placeholder="Email" required #userEmail>
+        <div class="alert alert-danger"
+        *ngIf="registForm.controls.userEmail.errors?.required && registForm.controls.userEmail.touched && !submited">
+          <span>Почта указана не верно</span>
+        </div>
+      </div>
+        <div class="form-group form__el">
+          <label>Пароль:</label>
+          <input class="user__info" formControlName="userPassword" name="userPassword" type="password" placeholder="Пароль" #userPass>
+          <div class="alert alert-danger"
+          *ngIf="registForm.controls.userPassword.errors?.required && registForm.controls.userPassword.touched && !submited">
+            <span>Минимальная длина 8 символов,
+              пароль должен состоять из букв и цифр
+            </span>
+          </div>
+        </div>
+        <div class="form-group form__el">
+          <input class="user__info" name="userRepeatPass" type="password" placeholder="Повторите пароль" #repeatPass>
+        </div>
+      <div class="form-group form__el" *ngFor="let gender of userGender">
+        <div>
+            <label for="gender">{{ gender }}</label>
+            <input class="genre__btn" value="{{ gender }}" 
+            id="gender" type="radio" name="gender" 
+            checked="checked" (change)="radioGengre($event)">
+        </div>
+      </div>
+      <div class="form-group form-el">
+        <div>
+          <select name="userRoles" formControlName="userRole">
+            <option *ngFor="let role of userRoles" value="{{ role }}">
+              {{ role }}
+            </option>
+          </select>
+        </div>
+        <div class="alert alert-danger"
+          *ngIf="userRoles.touched && userRoles.invalid">
+            <span>Выберите роль</span>
+        </div>
+      </div>
+      <button type="submit">Регистрация</button>
+      <a routerLink="/Login">Войти</a>
+      <a routerLink="/all-books">На главную</a>
+    </form>
+  </section>

@@ -1,0 +1,52 @@
+<main>
+  <div class="filter">
+    <div class="filter__search">
+      <div class="filter__main">
+          <input type="text" placeholder="Название" #title>
+          <button (click)="searchByTitle(title.value)">Поиск</button>
+      </div>
+      <div class="filter__main">
+        <input type="text" placeholder="Автор" #author>
+        <button (click)="searchByAuthor(author.value)">Поиск</button>
+      </div>
+      <div class="filter__main">
+        <input type="text" placeholder="Тип" #type>
+        <button (click)="searchByType(type.value)">Поиск</button>
+      </div>
+    </div>
+    <form class="filter__price">
+      <input type="number" name="minPrice" placeholder="Минимальная" #minPrice>
+      <input type="number" name="maxPrice" placeholder="Максимальная" #maxPrice>
+      <input class="btn btn-primary" type="button" value="Поиск" (click)="filterByPrice(
+        minPrice.value,
+        maxPrice.value
+      )">
+    </form>
+
+    <div class="clearFilter">
+      <button (click)="clearFilter()">Сброс фильтров</button>
+    </div>
+
+  </div>
+  <section class="catalog">
+    <div class="book" *ngFor="let book of books
+    | paginate: {
+      id: 'server',
+      itemsPerPage: 5,
+      currentPage: page,
+      totalItems: total
+    } 
+    trackBy: trackByFn">
+      <h3 class="book__title">{{ book.name }}</h3>
+      <p class="book__info">{{ book.description }}</p>
+      <p class="book__price">{{ book.price + "$" }}</p>
+      <button class="book__buy" (click)="addToBag(book)">Добавить в корзину</button>
+      <div class="showBook" (click)="showBook(book.id)">
+        <h3 class="showBook__title">Показать</h3>
+      </div>
+    </div>
+  </section>
+  <div class="has-text-centered">
+      <pagination-controls (pageChange)="getPage($event)" id="server" responsive="true"></pagination-controls>
+  </div>
+</main>

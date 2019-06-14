@@ -1,0 +1,34 @@
+<nav>
+  <div class="nav" (click)="showMenu()">
+    <span class="nav__line"></span>
+  </div>
+
+  <div class="nav__menu nMenu" [style.display]="visibility==true?'block' : 'none'">
+      <ul class="nMenu__list list">
+        <li class="list"><a routerLink="/all-books" (click)="closeNavMenu()">Книги</a></li>
+      </ul>
+      <div class="bag">
+        <a routerLink="/Shopping-bag" (click)="closeNavMenu()" class="bag__link">Корзина</a>
+      </div>
+
+      <div class="adminBuns">
+        <ul class="adminBuns__ul ABList" [hidden]="!adminBuns">
+          <li class="ABList__el">
+            <a routerLink="/adminBuns/Users" (click)="closeNavMenu()">Пользователи</a>
+          </li>
+          <li class="ABList__el">
+            <a routerLink="/adminBuns/Books" (click)="closeNavMenu()">Книги</a>
+          </li>
+          <li class="ABList__el">
+            <a routerLink="/adminBuns/Authors" (click)="closeNavMenu()">Авторы</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav__authorization nAuth" [hidden]="isUser">
+        <a routerLink="/auth/Login" (click)="closeNavMenu()">Войти</a>
+        <a routerLink="/auth/Registration" (click)="closeNavMenu()">Регистрация</a>
+      </div>
+  </div>
+  <div class="closeNav" [style.display]="visibility==true?'block' : 'none'" (click)="closeNavMenu()" ></div>
+</nav>

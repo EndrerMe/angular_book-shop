@@ -1,0 +1,106 @@
+<section class="editBooks"> 
+  <button type="button" (click)="showModalAddNewAuthor()" class="btn btn-info">Добавить автора</button>
+  <button type="button" (click)="showModalAddNewBook()" class="btn btn-success">Добавить книгу</button>
+  <div class="allBooks" *ngFor="let book of books
+  | paginate: {
+    id: 'server',
+    itemsPerPage: 5,
+    currentPage: page,
+    totalItems: total
+  }">
+    <div class="book">
+      <h4 class="book__name">{{ book.name }}</h4>
+      <span class="book__Show" (click)="showBookInfo(book.id)">Показать</span>
+    </div>
+    <div class="bookInfo" [hidden]="visibility !== book.id">
+      <h4 class="bookInfo__name">Название книги: {{ book.name }}</h4>
+      <!-- <p class="bookInfo__id">Id книги: {{ book._id }}</p> -->
+      <p class="bookInfo__email">Тип книги: {{ book.type }}</p>
+      <p class="bookInfo__pass">Информация о книге: {{ book.description }}</p>
+      <p class="bookInfo__genre" 
+      *ngFor="let author of book.authors">Автора книги: {{ author.name }}</p>
+      <p class="bookInfo__role">Цена книги: {{ book.price }} $</p>
+      <span class="changeBook" (click)="openModal(book)">Изменить</span>
+      <span class="deleteBook" (click)="deleteBook(book)">Удалить</span>
+    </div>
+  </div>
+
+  <div class="newBookModal" [hidden]="!newBookModalVisibility">
+    <div class="main">
+      <div class="close" (click)="closeNewBookModal()">
+        <span class="clos__line"></span>
+      </div>
+      <form [formGroup]="newBookForm"
+      (submit)="addNewBook()">
+        <div class="form-group form__el">
+          <input formControlName="newBookTitle" type="text" placeholder="Название">
+        </div>
+        <div class="form-group form__el">
+          <input formControlName="newBookType" type="text" placeholder="Тип">
+        </div>
+        <ng-multiselect-dropdown
+              name="authors"
+              [placeholder]="'Select authors'"
+              [data]="authors"
+              formControlName="newBookAuthor"
+              [disabled]="disabled"
+              [settings]="dropdownSettings">
+        </ng-multiselect-dropdown>
+        <div class="form-group form__el">
+          <textarea formControlName="newBookInfo" placeholder="Описание"></textarea>
+        </div>
+        <div class="form-group form__el">
+          <input formControlName="newBookPrice" type="number" placeholder="Цена">
+        </div>
+
+        <button type="submit">Добавить</button>
+      </form>
+    </div>
+  </div> 
+
+  <div class="newAuthor" [hidden]="!newAuthorModalVisibility">
+    <div class="main">
+      <div class="close" (click)="closeNewAuthorModal()">
+        <span class="clos__line"></span>
+      </div>
+      <div class="form-group form__el modalNewAuthor">
+        <input type="text" placeholder="Имя автора" [(ngModel)]="inputAuthor" #newAuthor>
+        <button (click)="addNewAuthor(newAuthor.value)" type="submit">Добавить</button>
+      </div>
+    </div>
+  </div> 
+
+  <div class="modal" [hidden]="!modalVisibility">
+    <div class="main">
+      <div class="close" (click)="closeModal()">
+        <span class="clos__line"></span>
+      </div>
+      <form [formGroup]="changeForm"
+      (submit)="changeBook()">
+        <div class="form-group form__el">
+          <input formControlName="name" type="text" placeholder="Название">
+        </div>
+        <div class="form-group form__el">
+          <input formControlName="type" type="text" placeholder="Тип">
+        </div>
+          <ng-multiselect-dropdown
+              name="authors"
+              [placeholder]="'Select authors'"
+              [data]="authors"
+              formControlName="authors"
+              [disabled]="disabled"
+              [settings]="dropdownSettings">
+          </ng-multiselect-dropdown>
+        <div class="form-group form__el">
+          <textarea formControlName="description" placeholder="Описание"></textarea>
+        </div>
+        <div class="form-group form__el">
+          <input formControlName="price" type="number" placeholder="Цена">
+        </div>
+
+        <button type="submit">Изменить</button>
+      </form>
+    </div>
+  </div> 
+  <pagination-controls id="server" (pageChange)="getPage($event)"></pagination-controls>
+</section>
