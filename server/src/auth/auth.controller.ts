@@ -18,16 +18,15 @@ export class AuthController {
 
     @Post("createUser")
     public async createUser(@Body() user: IAuth): Promise<IAuth> {
-        const checkUserByName = await this.authService.findUserByName(user.userName)
+        const checkUserByName = await this.authService.findUserByNameForRegist(user.userName)
         if (checkUserByName) {
+            return this.authService.create(user) 
+        } else {
             throw new HttpException({
-                status: HttpStatus.METHOD_NOT_ALLOWED,
+                status: HttpStatus.FORBIDDEN,
                 error: "Password is worng"
-            }, 405);
-        } 
-        console.log("user is add")
-        return this.authService.create(user)
-
+            }, 403);
+        }
     }
 
     @Post("login")

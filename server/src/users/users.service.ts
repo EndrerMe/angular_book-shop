@@ -38,4 +38,8 @@ export class UsersService {
         user.userPassword = hash
         return this.usersModel.updateOne({_id: user.id}, user)
     }
+
+    public async getSomeUsers(): Promise<IUsers[]> {
+        return await this.usersModel.find()
+    }
 }

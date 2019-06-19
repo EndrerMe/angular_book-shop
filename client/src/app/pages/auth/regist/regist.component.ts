@@ -60,7 +60,7 @@ export class RegistComponent implements OnInit {
           Validators.required
       ]),
       userRole: new FormControl (
-        "", [
+        "Обычный пользователь", [
           Validators.required
       ]),
       userPassword: new FormControl (

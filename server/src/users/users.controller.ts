@@ -35,4 +35,9 @@ export class UsersController {
         console.log("user is changed")
         return this.usersService.changeUser(user)
     }
+
+    @Get("getSomeUsers")
+    public async getSomeUsers(): Promise<IUsers[]> {
+        return this.usersService.getSomeUsers()
+    }
 }
