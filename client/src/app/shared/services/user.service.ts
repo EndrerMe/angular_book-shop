@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 // Environments
 import { environment } from 'src/environments/environment';
-// Models
+// Interfaces
 import { IUser } from 'src/app/shared/interfaces';
 
 @Injectable({

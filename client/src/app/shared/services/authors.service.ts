@@ -6,8 +6,9 @@ import { Observable } from 'rxjs';
 // Environmets
 import { environment } from 'src/environments/environment';
 // Models
-import { IAuthor } from 'src/app/shared/interfaces';
 import { PaginationModel } from 'src/app/shared/models';
+// Interfaces 
+import { IAuthor } from 'src/app/shared/interfaces';
 
 @Injectable({
   providedIn: 'root'

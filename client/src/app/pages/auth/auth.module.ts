@@ -9,6 +9,7 @@ import { LoginComponent } from 'src/app/pages/auth/login/login.component';
 import { RegistComponent } from 'src/app/pages/auth/regist/regist.component';
 // Router
 import { AuthRoutingComponent } from 'src/app/pages/auth/auth-router.module';
+// Modules
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
