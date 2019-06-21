@@ -4,9 +4,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 // Interfaces
-import { IBook } from 'src/book/interfaces/IBook';
+import { IBook } from './interfaces/IBook';
 // DTO
-import { BookDTO } from 'src/book/dto/book.dto';
+import { BookDTO } from './dto/book.dto';
 
 @Injectable()
 export class BookService {

@@ -2,11 +2,11 @@
 import { Controller, Body, Post, Get } from '@nestjs/common';
 
 // Services
-import { AuthorsService } from 'src/authors/authors.service';
+import { AuthorsService } from './authors.service';
 // Interfaces
-import { IAuthor } from 'src/authors/Interfaces/IBook';
+import { IAuthor } from './Interfaces/IBook';
 // Dto
-import { PaginationDTO } from 'src/pagination/dto/paginat.dto';
+import { PaginationDTO } from './../pagination/dto/paginat.dto';
 
 @Controller('authors')
 export class AuthorsController {

@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 // Interfaces
-import { IAuthor } from 'src/authors/Interfaces/IBook';
+import { IAuthor } from './Interfaces/IBook';
 
 @Injectable()
 export class AuthorsService {

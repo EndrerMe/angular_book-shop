@@ -3,11 +3,11 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 // Services
-import { BookService } from 'src/book/book.service';
+import { BookService } from './book.service';
 // Controllers
-import { BookController } from 'src/book/book.controller';
+import { BookController } from './book.controller';
 // Schemas
-import { BookSchema } from 'src/book/book-shema/book.schema';
+import { BookSchema } from './book-shema/book.schema';
 
 @Module({
   imports: [

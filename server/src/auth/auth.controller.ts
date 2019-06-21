@@ -3,9 +3,9 @@ import { Controller, Body, Post, HttpException, HttpStatus } from '@nestjs/commo
 import * as bcrypt from 'bcrypt';
 
 // Services
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from './auth.service';
 // Interfaces
-import { IAuth } from 'src/auth/Interfaces/IAuth';
+import { IAuth } from './Interfaces/IAuth';
 
 @Controller('auth')
 export class AuthController {

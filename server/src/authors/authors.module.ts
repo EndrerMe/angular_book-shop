@@ -3,11 +3,11 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 // Controllers
-import { AuthorsController } from 'src/authors/authors.controller';
+import { AuthorsController } from './authors.controller';
 // Services
-import { AuthorsService } from 'src/authors/authors.service';
+import { AuthorsService } from './authors.service';
 // Schemas
-import { AuthorSchema } from 'src/authors/author-schema/authors.schema';
+import { AuthorSchema } from './author-schema/authors.schema';
 
 @Module({
   imports: [

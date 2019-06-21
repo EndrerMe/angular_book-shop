@@ -6,9 +6,9 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 // Interfaces
-import { IAuth } from 'src/auth/Interfaces/IAuth';
+import { IAuth } from './Interfaces/IAuth';
 // Strategy
-import { JwtPayload } from 'src/strategy/interfaces/jwt.model';
+import { JwtPayload } from './../strategy/interfaces/jwt.model';
 
 @Injectable()
 export class AuthService {

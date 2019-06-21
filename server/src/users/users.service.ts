@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 // Interfaces
-import { IUsers } from 'src/users/model/users.model';
+import { IUsers } from './model/users.model';
 
 @Injectable()
 export class UsersService {
