@@ -2,75 +2,73 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 
 // Interfaces
-import { IBook } from './interfaces/IBook';
+import { IBook } from 'src/book/interfaces/IBook';
 // Services
-import { BookService } from './book.service';
-import { BookDTO } from './dto/book.dto';
+import { BookService } from 'src/book/book.service';
 // Dto
-import { PaginationDTO } from '../pagination/dto/paginat.dto';
+import { PaginationDTO } from 'src/pagination/dto/paginat.dto';
+import { BookDTO } from 'src/book/dto/book.dto';
 
 @Controller('books')
 export class BookController {
     constructor(
-        private bookService: BookService
+        private bookService: BookService,
     ) {
 
     }
 
-    @Get("getBooks")
+    @Get('getBooks')
     public getAllBooks(): Promise<IBook[]> {
         return this.bookService.getBooks();
     }
 
-    @Get("getById/:id")
-    public getById(@Param("id") id: string): Promise<IBook> {
-        return this.bookService.findBookById(id)
+    @Get('getById/:id')
+    public getById(@Param('id') id: string): Promise<IBook> {
+        return this.bookService.findBookById(id);
     }
 
-    @Post("addNewBook")
+    @Post('addNewBook')
     public addNewBook(@Body() book: IBook): Promise<IBook> {
-        return this.bookService.addNewBook(book)
+        return this.bookService.addNewBook(book);
     }
 
-    @Post("deleteBook")
+    @Post('deleteBook')
     public deleteBook(@Body() book: IBook): Promise<IBook> {
-        return this.bookService.deleteBook(book)
+        return this.bookService.deleteBook(book);
     }
 
-    @Post("changeBook")
+    @Post('changeBook')
     public changeBook(@Body() book: IBook): Promise<IBook> {
-        return this.bookService.changeBook(book)
+        return this.bookService.changeBook(book);
     }
 
-    @Post("searchByTitle") 
+    @Post('searchByTitle')
     public searchByTitle(@Body() title: BookDTO): Promise<IBook[]> {
-        return this.bookService.findBookByName(title)
+        return this.bookService.findBookByName(title);
     }
 
-    @Post("searchByAuthor") 
+    @Post('searchByAuthor')
     public searchByAuthor(@Body() author: BookDTO): Promise<IBook[]> {
-        return this.bookService.findBookByAuthor(author)
+        return this.bookService.findBookByAuthor(author);
     }
 
-    @Post("searchByType") 
+    @Post('searchByType')
     public searchByType(@Body() type: BookDTO): Promise<IBook[]> {
-        return this.bookService.findBookByType(type)
+        return this.bookService.findBookByType(type);
     }
 
-    @Post("searchByPrice")
+    @Post('searchByPrice')
     public searchByPrice(@Body() price: BookDTO): Promise<IBook[]> {
-        return this.bookService.findBookByPrice(price)
+        return this.bookService.findBookByPrice(price);
     }
 
-    @Post("paging")
+    @Post('paging')
     public paging(@Body() paging: PaginationDTO): Promise<IBook[]> {
-        return this.bookService.paging(paging.currentPage)
+        return this.bookService.paging(paging.currentPage);
     }
 
-    @Get("getTotal") 
+    @Get('getTotal')
     public getTotal(): Promise<{}> {
-        return this.bookService.getTotal()
+        return this.bookService.getTotal();
     }
-
-
 }

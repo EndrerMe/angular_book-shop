@@ -9,16 +9,16 @@ import { RegistComponent } from 'src/app/pages/auth/regist/regist.component';
 
 const routes: Routes = [
     {
-        path: "",
-        redirectTo: "Login",
-        pathMatch: "full"
+        path: '',
+        redirectTo: 'Login',
+        pathMatch: 'full'
     },
     {
-        path: "",
+        path: '',
         component: AuthComponent,
         children: [
-            {path: "Login", component: LoginComponent},
-            {path: "Registration", component: RegistComponent},
+            {path: 'Login', component: LoginComponent},
+            {path: 'Registration', component: RegistComponent},
         ]
     }
 ];

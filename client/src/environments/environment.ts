@@ -4,7 +4,14 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
+  mongodb: {
+    apiKey: 'AIzaSyC4RNNlqXSwTM1Kt6Pbgutq2yuavSQ9WnU',
+    authDomain: 'angularexampleapp.mongodb.com',
+    databaseURL: 'http://localhost:3000',
+    projectId: 'angularBookShop',
+    storageBucket: 'angularexampleapp.appspot.com',
+    messagingSenderId: '965114235515'
+  }
 };
 
 /*

@@ -1,2 +1,2 @@
-export * from "./IAuthor"
-export * from "./IUser"
+export * from './IAuthor';
+export * from './IUser';

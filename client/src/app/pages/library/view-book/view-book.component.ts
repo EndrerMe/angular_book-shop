@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // Services
-import { BagService, BooksService } from 
-'src/app/shared/services';
+import { BagService, BooksService } from 'src/app/shared/services';
 // Models
 import { BookModel } from 'src/app/shared/models';
 
@@ -22,7 +21,7 @@ export class ViewBookComponent implements OnInit {
     private bagService: BagService,
     private booksService: BooksService
     ) {
-      this.getBook(this.route.snapshot.paramMap.get('id'))
+      this.getBook(this.route.snapshot.paramMap.get('id'));
     }
 
   ngOnInit() {
@@ -30,15 +29,15 @@ export class ViewBookComponent implements OnInit {
 
   private getBook(id: string): void {
     this.booksService.getBookById(id).subscribe((res) => {
-      this.book = res
+      this.book = res;
     },
     (err) => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
 
   private addToBag(): void {
-    this.bagService.addToBag(this.book)
+    this.bagService.addToBag(this.book);
   }
 
   private addNewObjectToBag(book: BookModel): void {

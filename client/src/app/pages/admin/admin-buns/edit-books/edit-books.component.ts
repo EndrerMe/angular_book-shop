@@ -4,14 +4,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 // Services
-import { BooksService, AlertService, AuthorsService } 
-from 'src/app/shared/services';
+import { BooksService, AlertService, AuthorsService } from 'src/app/shared/services';
 // Models
-import { BookModel } 
-from 'src/app/shared/models';
+import { BookModel } from 'src/app/shared/models';
 // Interfaces
-import { IAuthor } 
-from "src/app/shared/interfaces"
+import { IAuthor } from 'src/app/shared/interfaces';
 
 
 @Component({
@@ -22,8 +19,8 @@ from "src/app/shared/interfaces"
 export class EditBooksComponent implements OnInit {
 
   private newBookForm: FormGroup;
-  private disabled: boolean = false;
-  private ShowFilter: boolean = true;
+  private disabled: boolean;
+  private ShowFilter: boolean;
   private authors: IAuthor[];
   private selectedItems: string[] = [];
   private dropdownSettings: any = {};
@@ -38,7 +35,7 @@ export class EditBooksComponent implements OnInit {
   private modalVisibility: boolean;
   private changeForm: FormGroup;
   private bookForChange: BookModel;
-  private page: number = 1;
+  private page: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,34 +44,34 @@ export class EditBooksComponent implements OnInit {
     private authorsService: AuthorsService,
     private alertService: AlertService
   ) {
-    this.newBookModalVisibility = false
-    this.newAuthorModalVisibility = false
-    this.getPage(this.page)
+    this.newBookModalVisibility = false;
+    this.newAuthorModalVisibility = false;
+    this.getPage(this.page);
 
   }
 
   ngOnInit() {
-    this.getAllAuthors()
+    this.getAllAuthors();
 
     this.newBookForm = this.formBuilder.group({
       newBookTitle: new FormControl(
-        "", [
+      '', [
           Validators.required
       ]),
       newBookType: new FormControl(
-        "", [
+        '', [
           Validators.required
       ]),
       newBookAuthor: [this.selectedItems],
       newBookInfo: new FormControl(
-        "", [
+        '', [
           Validators.required
       ]),
       newBookPrice: new FormControl(
-        "", [
+        '', [
           Validators.required
       ]),
-    })
+    });
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -88,49 +85,49 @@ export class EditBooksComponent implements OnInit {
 
     this.changeForm = this.formBuilder.group ({
       id: new FormControl(
-        "", [
+        '', [
       ]),
       name: new FormControl(
-        "", [
+        '', [
           Validators.required
       ]),
       type: new FormControl(
-        "", [
+        '', [
           Validators.required
       ]),
       authors: [this.selectedItems],
       description: new FormControl(
-        "", [
+        '', [
           Validators.required
       ]),
       price: new FormControl(
-        "", [
+        '', [
           Validators.required
       ]),
-    })
+    });
   }
 
   private getPage(page: number): void {
-    let paging = {
+    const paging = {
       currentPage: page
-    }
+    };
     this.booksService.paging(paging).subscribe((res) => {
-      this.books = res
-      this.page = page
-      this.getTotal()
+      this.books = res;
+      this.page = page;
+      this.getTotal();
     },
     (error) => {
-      console.log(error)
-    })
+      console.log(error);
+    });
   }
 
   private getTotal(): void {
     this.booksService.getTotal().subscribe((res) => {
-      this.total = res
+      this.total = res;
     },
     (err) => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
 
   private showModalAddNewAuthor(): void {
@@ -151,7 +148,7 @@ export class EditBooksComponent implements OnInit {
 
   private showBookInfo(bookId: string): void {
     if (this.visibility === bookId) {
-      this.visibility = "";
+      this.visibility = '';
       return;
     }
     this.visibility = bookId;
@@ -161,27 +158,26 @@ export class EditBooksComponent implements OnInit {
     let author: IAuthor;
     author = {
       name: authorName
-    }
+    };
     this.authorsService.addNewAuthor(author).subscribe((res) => {
-      this.authors.push(res)
-      console.log(this.authors)
-      this.newAuthorModalVisibility = false
-      this.alertService.success("Author is added")
+      this.authors.push(res);
+      console.log(this.authors);
+      this.newAuthorModalVisibility = false;
+      this.alertService.success('Author is added');
     },
     (err) => {
-      console.log(err)
-      this.alertService.error(err.error.error)
-    })
-    
+      console.log(err);
+      this.alertService.error(err.error.error);
+    });
   }
 
   private getAllAuthors(): void {
     this.authorsService.getAllAuthors().subscribe((res) => {
-      this.authors = res
+      this.authors = res;
     },
     (err) => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
 
   private addNewBook(): void {
@@ -189,13 +185,13 @@ export class EditBooksComponent implements OnInit {
       this.books.push(res);
       this.newBookForm.reset();
       this.newBookModalVisibility = false;
-      this.getPage(this.page)
-      this.alertService.success("Book is created")
+      this.getPage(this.page);
+      this.alertService.success('Book is created');
     },
     (err) => {
-      console.log(err)
-      this.alertService.error(err.error.error)
-    })
+      console.log(err);
+      this.alertService.error(err.error.error);
+    });
   }
 
   private openModal(book: BookModel): void {
@@ -208,37 +204,37 @@ export class EditBooksComponent implements OnInit {
   }
 
   private changeBook(): void {
-    this.changeForm.value.id = this.bookForChange.id
+    this.changeForm.value.id = this.bookForChange.id;
     this.booksService.changeBook(this.changeForm.value).subscribe((res) => {
-      console.log(res)
+      console.log(res);
       for (let i = 0; i < this.books.length; i++) {
         if (this.books[i].id === this.bookForChange.id) {
-          this.books[i] = this.changeForm.value
+          this.books[i] = this.changeForm.value;
         }
       }
       this.modalVisibility = false;
-      this.alertService.success("Book is change")
+      this.alertService.success('Book is change');
     },
     (err) => {
-      console.log(err)
-      this.alertService.success(err.error.error)
-    })
+      console.log(err);
+      this.alertService.success(err.error.error);
+    });
   }
 
   private deleteBook(book: BookModel): void {
 
     this.booksService.deleteBook(book).subscribe((res) => {
-      console.log(res)
+      console.log(res);
       for (let i = 0; i < this.books.length; i++) {
         if (this.books[i] === book) {
-          this.books.splice(i, 1)
+          this.books.splice(i, 1);
         }
       }
-      this.alertService.success("Book is delete")
+      this.alertService.success('Book is delete');
     },
     (err) => {
-      console.log(err)
-      this.alertService.success(err.error.error)
+      console.log(err);
+      this.alertService.success(err.error.error);
     });
   }
 }

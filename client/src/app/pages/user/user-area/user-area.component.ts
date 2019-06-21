@@ -24,11 +24,11 @@ export class UserAreaComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService
   ) {
-    this.users = JSON.parse(localStorage.getItem('users'))
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    this.users = JSON.parse(localStorage.getItem('users'));
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.visibility = false;
     this.adminBuns = false;
-    if (this.currentUser.userRole == "Администратор") {
+    if (this.currentUser.userRole === 'Администратор') {
       this.adminBuns = true;
     }
   }
@@ -38,7 +38,7 @@ export class UserAreaComponent implements OnInit {
 
   private logout(): void {
     this.authService.userLogOut();
-    this.router.navigate([""]);
+    this.router.navigate(['']);
   }
 
   private showMenu(): void {

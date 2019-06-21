@@ -1,7 +1,7 @@
 // Vendors
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router } from '@angular/router';
-//Services
+// Services
 import { AuthService } from 'src/app/shared/services';
 // Models
 import { IUser } from 'src/app/shared/interfaces';
@@ -19,16 +19,15 @@ export class AuthGuard implements CanActivate  {
     const currentUser: IUser = this.authService.getCurrentUser();
 
     if (currentUser) {
-      if (route.data.roles && 
+      if (route.data.roles &&
         route.data.roles.indexOf(currentUser.userRole) === -1) {
-          this.router.navigate([''])
-          return false
+          this.router.navigate(['']);
+          return false;
         }
-
-        return true
+      return true;
     }
 
-    this.router.navigate(["auth/Login"], {queryParams: {returnUrl: state.url}});
+    this.router.navigate(['auth/Login'], {queryParams: {returnUrl: state.url}});
     return false;
   }
 }

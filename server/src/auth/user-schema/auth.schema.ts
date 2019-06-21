@@ -7,4 +7,4 @@ export const AuthSchema = new mongoose.Schema({
     userGender: String,
     userRole: String,
     token: String,
-})
+});

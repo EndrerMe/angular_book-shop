@@ -3,19 +3,19 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 // Controllers
-import { AuthorsController } from './authors.controller';
+import { AuthorsController } from 'src/authors/authors.controller';
 // Services
-import { AuthorsService } from './authors.service';
+import { AuthorsService } from 'src/authors/authors.service';
 // Schemas
-import { AuthorSchema } from './author-schema/authors.schema';
+import { AuthorSchema } from 'src/authors/author-schema/authors.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      {name: "Authors", schema: AuthorSchema}
-    ])
+      {name: 'Authors', schema: AuthorSchema},
+    ]),
   ],
   controllers: [AuthorsController],
-  providers: [AuthorsService]
+  providers: [AuthorsService],
 })
 export class AuthorsModule {}

@@ -7,60 +7,57 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 // Models
 import { BookModel } from 'src/app/shared/models';
-import { filterModel } from '../models/filter.model';
-import { PaginationModel } from '../models/paginat.model';
+import { FilterModel } from 'src/app/shared/models';
+import { PaginationModel } from 'src/app/shared/models';
 
 @Injectable()
 export class BooksService {
   constructor(
       private http: HttpClient
   ) {
-  
   }
 
   public getBooks(): Observable<BookModel[]> {
-    return this.http.get<BookModel[]>(`${environment.apiUrl}/books/getBooks`)
+    return this.http.get<BookModel[]>(`${environment.mongodb.databaseURL}/books/getBooks`);
   }
 
   public getBookById(id: string): Observable<BookModel> {
-    return this.http.get<BookModel>(`${environment.apiUrl}/books/getById/` + id)
+    return this.http.get<BookModel>(`${environment.mongodb.databaseURL}/books/getById/` + id);
   }
 
   public addNewBook(book: BookModel): Observable<BookModel> {
-    return this.http.post<BookModel>(`${environment.apiUrl}/books/addNewBook`, book)
+    return this.http.post<BookModel>(`${environment.mongodb.databaseURL}/books/addNewBook`, book);
   }
 
   public deleteBook(book: BookModel): Observable<BookModel> {
-    return this.http.post<BookModel>(`${environment.apiUrl}/books/deleteBook`, book)
+    return this.http.post<BookModel>(`${environment.mongodb.databaseURL}/books/deleteBook`, book);
   }
 
   public changeBook(book: BookModel): Observable<BookModel> {
-    return this.http.post<BookModel>(`${environment.apiUrl}/books/changeBook`, book)
+    return this.http.post<BookModel>(`${environment.mongodb.databaseURL}/books/changeBook`, book);
   }
 
-  public searchByTitle(book: filterModel): Observable<BookModel[]> {
-    return this.http.post<BookModel[]>(`${environment.apiUrl}/books/searchByTitle`, book)
+  public searchByTitle(book: FilterModel): Observable<BookModel[]> {
+    return this.http.post<BookModel[]>(`${environment.mongodb.databaseURL}/books/searchByTitle`, book);
   }
 
-  public searchByAuthor(author: filterModel): Observable<BookModel[]> {
-    return this.http.post<BookModel[]>(`${environment.apiUrl}/books/searchByAuthor`, author)
+  public searchByAuthor(author: FilterModel): Observable<BookModel[]> {
+    return this.http.post<BookModel[]>(`${environment.mongodb.databaseURL}/books/searchByAuthor`, author);
   }
 
-  public searchByType(type: filterModel): Observable<BookModel[]> {
-    return this.http.post<BookModel[]>(`${environment.apiUrl}/books/searchByType`, type)
+  public searchByType(type: FilterModel): Observable<BookModel[]> {
+    return this.http.post<BookModel[]>(`${environment.mongodb.databaseURL}/books/searchByType`, type);
   }
 
-  public searchByPrice(price: filterModel): Observable<BookModel[]> {
-    return this.http.post<BookModel[]>(`${environment.apiUrl}/books/searchByPrice`, price)
+  public searchByPrice(price: FilterModel): Observable<BookModel[]> {
+    return this.http.post<BookModel[]>(`${environment.mongodb.databaseURL}/books/searchByPrice`, price);
   }
 
   public paging(page: PaginationModel): Observable<BookModel[]> {
-    return this.http.post<BookModel[]>(`${environment.apiUrl}/books/paging`, page)
+    return this.http.post<BookModel[]>(`${environment.mongodb.databaseURL}/books/paging`, page);
   }
 
   public getTotal(): Observable<number> {
-    return this.http.get<number>(`${environment.apiUrl}/books/getTotal`)
+    return this.http.get<number>(`${environment.mongodb.databaseURL}/books/getTotal`);
   }
-
-  
 }

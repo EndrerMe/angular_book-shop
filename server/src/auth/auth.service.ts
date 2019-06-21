@@ -6,25 +6,24 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 // Interfaces
-import { IAuth } from './Interfaces/IAuth';
+import { IAuth } from 'src/auth/Interfaces/IAuth';
 // Strategy
 import { JwtPayload } from 'src/strategy/interfaces/jwt.model';
-
 
 @Injectable()
 export class AuthService {
     constructor(
-        @InjectModel("Users") private readonly authModel: Model<IAuth>,
-        private readonly jwtService: JwtService
+        @InjectModel('Users') private readonly authModel: Model<IAuth>,
+        private readonly jwtService: JwtService,
     ) {}
 
     public async create(user: IAuth): Promise<IAuth> {
-        const saltRounds = 10
-        let createdUser = new this.authModel(user)
-        bcrypt.hash(createdUser.userPassword, saltRounds, async function (err, hash) {
-            createdUser.userPassword = hash
-            return await createdUser.save()
-        });     
+        const saltRounds = 10;
+        const createdUser = new this.authModel(user);
+        bcrypt.hash(createdUser.userPassword, saltRounds, async (err, hash) => {
+            createdUser.userPassword = hash;
+            return await createdUser.save();
+        });
         return createdUser;
     }
 
@@ -32,11 +31,11 @@ export class AuthService {
         const user = await this.authModel.findOne({userName: username});
 
         if (user === null) {
-            return true
+            return true;
         } else {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,
-                error: "User allready in use"
+                error: 'User allready in use',
             }, 403);
         }
     }
@@ -46,24 +45,23 @@ export class AuthService {
         if (user === null) {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
-                error: "User not found"
+                error: 'User not found',
             }, 404);
         } else {
             return user;
         }
-        
     }
 
     public async singIn(userName: string): Promise<string> {
-        const neededUser = await this.findUserByName(userName)
+        const neededUser = await this.findUserByName(userName);
         const user: JwtPayload = {
             id: neededUser.id,
             userName: neededUser.userName,
             userEmail: neededUser.userEmail,
             userGender: neededUser.userGender,
-            userRole: neededUser.userRole
+            userRole: neededUser.userRole,
         };
-        return this.jwtService.sign(user)
+        return this.jwtService.sign(user);
     }
 
     // public validateUser(payload: any): Promise<any> {

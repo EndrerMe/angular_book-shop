@@ -44,6 +44,20 @@
                 margin-left: 45%;
             }
         }
+
+        @media (min-width: 768px) {
+            .book,
+            .bookInfo {
+                width: 70%;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .book,
+            .bookInfo {
+                width: 50%;
+            }
+        }
     }
 
     .modal,
@@ -110,6 +124,13 @@
                     min-height: 150px;
                     margin-top: 20px;
                 }
+
+                ng-multiselect-dropdown {
+                    display: flex;
+                    justify-content: center;
+                    width: 15vw;
+                    min-width: 178px;
+                }
             }
         }
     }
@@ -122,32 +143,5 @@
         display: flex;
         justify-content: center;
         margin-top: 50px;
-    }
-    
-    ng-multiselect-dropdown {
-        display: flex;
-        justify-content: center;
-        width: 15vw;
-        min-width: 178px;
-    }
-}
-
-
-
-
-
-
-
-@media (min-width: 768px) {
-    .book,
-    .bookInfo {
-        width: 70%;
-    }
-}
-
-@media (min-width: 1200px) {
-    .book,
-    .bookInfo {
-        width: 50%;
     }
 }

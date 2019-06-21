@@ -9,12 +9,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from 'src/app/shared/services';
 // Components
 import { AppComponent } from 'src/app/app.component';
-import { AlertComponent } from './shared/directives/alert/alert.component';
+import { AlertComponent } from 'src/app/shared/directives/alert/alert.component';
 // Routing
 import { AppRoutingModule } from 'src/app/app-routing.module';
 // Moduls
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AuthModule } from './pages/auth/auth.module';
+import { AuthModule } from 'src/app/pages/auth/auth.module';
 
 
 @NgModule({

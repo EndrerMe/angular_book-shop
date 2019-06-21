@@ -21,12 +21,12 @@ export class AuthService {
   ) { }
 
   public login(formValue: IUser): void {
-    let users = JSON.parse(localStorage.getItem('users'));
+    const users = JSON.parse(localStorage.getItem('users'));
     for (let i = 0; i < users.length; i++) {
       if (formValue.userPassword === users[i].userPassword &&
         formValue.userName === users[i].userName) {
-          localStorage.setItem('currentUser', JSON.stringify(users[i]))
-          this.router.navigate([""])
+          localStorage.setItem('currentUser', JSON.stringify(users[i]));
+          this.router.navigate(['']);
         } else {
           continue;
         }
@@ -40,16 +40,16 @@ export class AuthService {
       userEmail: userData.userEmail,
       userGender: userData.userGender,
       userRole: userData.userRole
-    }
-    return this.http.post<IUser>(`${environment.apiUrl}/auth/createUser`, registData)
+    };
+    return this.http.post<IUser>(`${environment.mongodb.databaseURL}/auth/createUser`, registData);
   }
 
   public getUserForLogin(loginData: IUser): Observable<IUser> {
     const logData = {
       userName: loginData.userName,
       userPassword: loginData.userPassword
-    }
-    return this.http.post<IUser>(`${environment.apiUrl}/auth/login`, logData)
+    };
+    return this.http.post<IUser>(`${environment.mongodb.databaseURL}/auth/login`, logData);
   }
 
   public getCurrentUser(): IUser {
@@ -61,7 +61,7 @@ export class AuthService {
   }
 
   public userLogOut(): void {
-    localStorage.removeItem('currentUser')
+    localStorage.removeItem('currentUser');
   }
 
 }

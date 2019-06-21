@@ -18,19 +18,18 @@ export class UserService {
   ) { }
 
   public paging(paging): Observable<IUser[]> {
-    return this.http.post<IUser[]>(`${environment.apiUrl}/users/paging`, paging)
+    return this.http.post<IUser[]>(`${environment.mongodb.databaseURL}/users/paging`, paging);
   }
 
   public deleteUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${environment.apiUrl}/users/deleteUser`, user)
+    return this.http.post<IUser>(`${environment.mongodb.databaseURL}/users/deleteUser`, user);
   }
 
   public changeUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${environment.apiUrl}/users/changeUser`, user)
+    return this.http.post<IUser>(`${environment.mongodb.databaseURL}/users/changeUser`, user);
   }
 
   public getTotal(): Observable<number> {
-    return this.http.get<number>(`${environment.apiUrl}/users/getTotal`)
+    return this.http.get<number>(`${environment.mongodb.databaseURL}/users/getTotal`);
   }
-  
 }

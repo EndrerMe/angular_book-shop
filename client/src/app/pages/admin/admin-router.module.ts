@@ -11,12 +11,12 @@ import { EditBooksComponent } from 'src/app/pages/admin/admin-buns/edit-books/ed
 const routes: Routes = [
 
     {
-        path: "",
+        path: '',
         component: AdminComponent,
         children: [
-            {path: "Users", component: EditUsersComponent},
-            {path: "Books", component: EditBooksComponent},
-            {path: "Authors", component: EditAuthorsComponent}
+            {path: 'Users', component: EditUsersComponent},
+            {path: 'Books', component: EditBooksComponent},
+            {path: 'Authors', component: EditAuthorsComponent}
         ]
     }
 ];

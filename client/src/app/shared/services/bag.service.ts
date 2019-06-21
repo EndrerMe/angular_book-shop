@@ -1,7 +1,7 @@
-//Vendors
+// Vendors
 import { Injectable } from '@angular/core';
 
-//Models
+// Models
 import { BookModel } from 'src/app/shared/models';
 
 @Injectable({
@@ -12,13 +12,13 @@ export class BagService {
   public bag: BookModel[] = [] as BookModel[];
 
   constructor() {
-    if (localStorage.getItem("bag")) {
+    if (localStorage.getItem('bag')) {
       this.bag = JSON.parse(localStorage.getItem('bag'));
     }
   }
 
   public getBag(): BookModel[] {
-    return this.bag
+    return this.bag;
   }
 
   public addToBag(book: BookModel): void {
@@ -49,6 +49,5 @@ export class BagService {
         localStorage.setItem('bag', JSON.stringify(this.bag));
       }
     }
-    
   }
 }

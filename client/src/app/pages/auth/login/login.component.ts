@@ -1,12 +1,11 @@
 // Vendors
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import * as jwt_decode from "jwt-decode"
+import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
 
 // Services
-import { AuthService, AlertService } 
-from 'src/app/shared/services';
+import { AuthService, AlertService } from 'src/app/shared/services';
 
 
 @Component({
@@ -29,32 +28,32 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      "userName": new FormControl (
-        "", [
+      userName: new FormControl (
+        '', [
           Validators.required,
           Validators.pattern(this.userNamePattern)
       ]),
-      "userPassword": new FormControl(
-        "", [
+      userPassword: new FormControl(
+        '', [
           Validators.required,
           Validators.pattern(this.userPassPattern),
         ]),
-    })
+    });
   }
 
   private login(): void {
     this.authService.getUserForLogin(this.loginForm.value).subscribe((res) => {
-      let decode = jwt_decode(res.token)
-      this.alertService.success("You logined", false)
-      localStorage.setItem("currentUser", JSON.stringify(decode))
+      const decode = jwt_decode(res.token);
+      this.alertService.success('You logined', false);
+      localStorage.setItem('currentUser', JSON.stringify(decode));
       setTimeout(() => {
-        this.router.navigate(["/all-books"])
-      }, 1000)
+        this.router.navigate(['/all-books']);
+      }, 1000);
     },
     (err) => {
-      console.log(err)
-      this.alertService.error(err.error.error)
-    })
+      console.log(err);
+      this.alertService.error(err.error.error);
+    });
   }
 
 }

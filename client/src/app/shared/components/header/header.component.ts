@@ -14,17 +14,20 @@ export class HeaderComponent implements OnInit {
 
   private userName: string;
   private userId: number;
-  private visibility: boolean = false;
+  private visibility: boolean;
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {
-    if (localStorage.getItem("currentUser")) {
+
+    if (localStorage.getItem('currentUser')) {
       this.userName = JSON.parse(localStorage.getItem('currentUser')).userName;
       this.userId = JSON.parse(localStorage.getItem('currentUser')).id;
-      console.log(this.userName)
+      console.log(this.userName);
       this.visibility = true;
+    } else {
+      this.visibility = false;
     }
   }
 
@@ -32,11 +35,11 @@ export class HeaderComponent implements OnInit {
   }
 
   private logout(): void {
-    this.authService.userLogOut()
+    this.authService.userLogOut();
     window.location.reload();
   }
 
   private toUserArea(): void {
-    this.router.navigate(["UserArea"]);
+    this.router.navigate(['UserArea']);
   }
 }

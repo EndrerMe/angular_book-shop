@@ -2,45 +2,45 @@
 import { Controller, Body, Post, Get } from '@nestjs/common';
 
 // Services
-import { AuthorsService } from './authors.service';
+import { AuthorsService } from 'src/authors/authors.service';
 // Interfaces
-import { IAuthor } from './Interfaces/IBook';
+import { IAuthor } from 'src/authors/Interfaces/IBook';
 // Dto
-import { PaginationDTO } from '../pagination/dto/paginat.dto';
+import { PaginationDTO } from 'src/pagination/dto/paginat.dto';
 
 @Controller('authors')
 export class AuthorsController {
     constructor(
-        private authorsService: AuthorsService
+        private authorsService: AuthorsService,
     ) {}
 
-    @Post("addNewAuthor")
+    @Post('addNewAuthor')
     public async addNewAuthor(@Body() author: IAuthor): Promise<IAuthor> {
-        return this.authorsService.addNewAuthor(author)
+        return this.authorsService.addNewAuthor(author);
     }
 
-    @Post("paging")
+    @Post('paging')
     public async paging(@Body() paging: PaginationDTO): Promise<IAuthor[]> {
-        return this.authorsService.paging(paging.currentPage)
+        return this.authorsService.paging(paging.currentPage);
     }
 
-    @Get("getTotal")
+    @Get('getTotal')
     public async getTotal(): Promise<{}> {
-        return this.authorsService.getTotal()
+        return this.authorsService.getTotal();
     }
 
-    @Get("getAllAuthors")
+    @Get('getAllAuthors')
     public async getAllAuthors(): Promise<IAuthor[]> {
-        return this.authorsService.getAllAuthors()
+        return this.authorsService.getAllAuthors();
     }
 
-    @Post("changeAuthorName")
+    @Post('changeAuthorName')
     public async changeAuthorName(@Body() author: IAuthor): Promise<IAuthor> {
-        return this.authorsService.changeAuthorName(author)
+        return this.authorsService.changeAuthorName(author);
     }
 
-    @Post("deleteAuthor")
+    @Post('deleteAuthor')
     public async deleteAuthor(@Body() author: IAuthor): Promise<IAuthor> {
-        return this.authorsService.deleteAuthor(author)
+        return this.authorsService.deleteAuthor(author);
     }
 }

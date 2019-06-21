@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 // Models
 import { IAuthor } from 'src/app/shared/interfaces';
-import { PaginationModel } from '../models/paginat.model';
+import { PaginationModel } from 'src/app/shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,26 +19,26 @@ export class AuthorsService {
   ) {}
 
   public getAllAuthors(): Observable<IAuthor[]> {
-    return this.http.get<IAuthor[]>(`${environment.apiUrl}/authors/getAllAuthors`)
+    return this.http.get<IAuthor[]>(`${environment.mongodb.databaseURL}/authors/getAllAuthors`);
   }
 
   public addNewAuthor(author: IAuthor): Observable<IAuthor> {
-    return this.http.post<IAuthor>(`${environment.apiUrl}/authors/addNewAuthor`, author)
+    return this.http.post<IAuthor>(`${environment.mongodb.databaseURL}/authors/addNewAuthor`, author);
   }
 
   public paging(paging: PaginationModel): Observable<IAuthor[]> {
-    return this.http.post<IAuthor[]>(`${environment.apiUrl}/authors/paging`, paging)
+    return this.http.post<IAuthor[]>(`${environment.mongodb.databaseURL}/authors/paging`, paging);
   }
 
   public getTotal(): Observable<number> {
-    return this.http.get<number>(`${environment.apiUrl}/authors/getTotal`)
+    return this.http.get<number>(`${environment.mongodb.databaseURL}/authors/getTotal`);
   }
 
   public changeAuthorName(author: IAuthor): Observable<IAuthor> {
-    return this.http.post<IAuthor>(`${environment.apiUrl}/authors/changeAuthorName`, author)
+    return this.http.post<IAuthor>(`${environment.mongodb.databaseURL}/authors/changeAuthorName`, author);
   }
 
   public deleteAuthor(author: IAuthor): Observable<IAuthor> {
-    return this.http.post<IAuthor>(`${environment.apiUrl}/authors/deleteAuthor`, author)
+    return this.http.post<IAuthor>(`${environment.mongodb.databaseURL}/authors/deleteAuthor`, author);
   }
 }

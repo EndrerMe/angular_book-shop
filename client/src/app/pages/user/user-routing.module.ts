@@ -8,10 +8,10 @@ import { UserAreaComponent } from 'src/app/pages/user/user-area/user-area.compon
 
 const routes: Routes = [
     {
-        path: "",
+        path: '',
         component: UserAreaComponent
     }
-]
+];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

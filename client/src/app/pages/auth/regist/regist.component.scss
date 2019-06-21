@@ -42,12 +42,13 @@
             cursor: pointer;
             transition: .3s;
         }
+
+        
+        input.ng-touched.ng-invalid {border:solid red 2px;}
+        input.ng-touched.ng-valid {border:solid green 2px;}
     }   
 
     button:hover {
         background-color: #baffb5;
     }
 }
-
-input.ng-touched.ng-invalid {border:solid red 2px;}
-input.ng-touched.ng-valid {border:solid green 2px;}

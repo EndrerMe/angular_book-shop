@@ -39,6 +39,20 @@
                 cursor: pointer;
             }
         }
+
+        @media (min-width: 768px) {
+            .user,
+            .userInfo {
+                width: 70%;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .user,
+            .userInfo {
+                width: 50%;
+            }
+        }
     }
 
     .modal {
@@ -110,16 +124,3 @@
     }
 }
 
-@media (min-width: 768px) {
-    .user,
-    .userInfo {
-        width: 70%;
-    }
-}
-
-@media (min-width: 1200px) {
-    .user,
-    .userInfo {
-        width: 50%;
-    }
-}

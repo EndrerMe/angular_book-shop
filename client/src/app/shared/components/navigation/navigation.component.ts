@@ -1,9 +1,9 @@
 // Vendors
 import { Component, OnInit } from '@angular/core';
 
-//Interfaces
+// Interfaces
 import { IUser } from 'src/app/shared/interfaces';
-//Enums
+// Enums
 import { userRole } from 'src/app/shared/enum';
 
 @Component({
@@ -13,18 +13,24 @@ import { userRole } from 'src/app/shared/enum';
 })
 export class NavigationComponent implements OnInit {
 
-  private visibility: boolean = false;
-  private adminBuns: boolean = false;
-  private isUser: boolean = false;
+  private visibility: boolean;
+  private adminBuns: boolean;
+  private isUser: boolean;
   private currentUser: IUser;
 
   constructor() {
-    this.currentUser = JSON.parse(localStorage.getItem("currentUser"))
+    this.visibility = false;
+
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (this.currentUser) {
       this.isUser = true;
-      if (this.currentUser.userRole == userRole.admin){
+      if (this.currentUser.userRole === userRole.admin) {
         this.adminBuns = true;
+      } else {
+        this.adminBuns = false;
       }
+    } else {
+      this.isUser = false;
     }
   }
 

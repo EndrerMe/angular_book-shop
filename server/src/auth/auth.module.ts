@@ -5,17 +5,16 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
 // Services
-import { AuthService } from './auth.service';
+import { AuthService } from 'src/auth/auth.service';
 // Schemas
-import { AuthSchema } from './user-schema/auth.schema';
+import { AuthSchema } from 'src/auth/user-schema/auth.schema';
 // Controllers
-import { AuthController } from './auth.controller';
-
+import { AuthController } from 'src/auth/auth.controller';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      {name: "Users", schema: AuthSchema}
+      {name: 'Users', schema: AuthSchema},
     ]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
@@ -23,9 +22,9 @@ import { AuthController } from './auth.controller';
       signOptions: {
         expiresIn: 3600,
       },
-    }), 
+    }),
   ],
   controllers: [AuthController],
-  providers: [AuthService]
+  providers: [AuthService],
 })
 export class AuthModule {}

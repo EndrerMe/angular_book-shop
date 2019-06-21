@@ -1,2 +1,2 @@
-export * from "./gender.enum"
-export * from "./userRole.enum"
+export * from './gender.enum';
+export * from './userRole.enum';

@@ -2,8 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // Services
-import { AuthorsService,AlertService } 
-from 'src/app/shared/services';
+import { AuthorsService, AlertService } from 'src/app/shared/services';
 // Models
 import { IAuthor } from 'src/app/shared/interfaces';
 
@@ -15,19 +14,19 @@ import { IAuthor } from 'src/app/shared/interfaces';
 })
 export class EditAuthorsComponent implements OnInit {
 
-  private authors: IAuthor[] = []
+  private authors: IAuthor[] = [];
   private visibility: string;
   private authorNameModalVisibility: boolean;
   private changedAuthor: IAuthor;
   private newAuthorModal: boolean;
-  private page: number = 1;
+  private page: number;
   private total: number;
 
   constructor(
     private authorsService: AuthorsService,
     private alertService: AlertService
   ) {
-    this.getPage(this.page)
+    this.getPage(this.page);
     this.authorNameModalVisibility = false;
     this.newAuthorModal = false;
   }
@@ -36,36 +35,36 @@ export class EditAuthorsComponent implements OnInit {
   }
 
   private getPage(page: number): void {
-    let paging = {
+    const paging = {
       currentPage: page
-    }
+    };
     this.authorsService.paging(paging).subscribe((res) => {
-      this.authors = res
-      this.page = page
-      this.getTotal()
+      this.authors = res;
+      this.page = page;
+      this.getTotal();
     },
     (err) => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
 
   private getTotal(): void {
     this.authorsService.getTotal().subscribe((res) => {
-      this.total = res
+      this.total = res;
     },
     (err) => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
 
   private openModal(author: IAuthor): void {
-    this.changedAuthor = author
+    this.changedAuthor = author;
     this.authorNameModalVisibility = true;
   }
 
   private showAuthorInfo(bookId: string): void {
     if (this.visibility === bookId) {
-      this.visibility = "";
+      this.visibility = '';
       return;
     }
     this.visibility = bookId;
@@ -83,17 +82,17 @@ export class EditAuthorsComponent implements OnInit {
     let author: IAuthor;
     author = {
       name: authorName
-    }
+    };
     this.authorsService.addNewAuthor(author).subscribe((res) => {
-      this.authors.push(res)
+      this.authors.push(res);
       this.newAuthorModal = false;
-      this.getPage(this.page)
-      this.alertService.success("Author is added", false)
+      this.getPage(this.page);
+      this.alertService.success('Author is added', false);
     },
     (err) => {
-      console.log(err)
-      this.alertService.error(err.error.error)
-    })
+      console.log(err);
+      this.alertService.error(err.error.error);
+    });
   }
 
   private closeAuthorNameModal(): void {
@@ -105,37 +104,37 @@ export class EditAuthorsComponent implements OnInit {
     author = {
       id: this.changedAuthor.id,
       name: authorName
-    }
+    };
 
     this.authorsService.changeAuthorName(author).subscribe((res) => {
       for (let i = 0; i < this.authors.length; i++) {
         if (this.authors[i].id === author.id) {
-          this.authors[i] = author
+          this.authors[i] = author;
           this.authorNameModalVisibility = false;
         }
       }
-      this.alertService.success("Author is changed", false)
+      this.alertService.success('Author is changed', false);
     },
     (err) => {
-      console.log(err)
-      this.alertService.error("Wrong data", false)
-    })
+      console.log(err);
+      this.alertService.error('Wrong data', false);
+    });
   }
 
   private deleteAuthor(author: IAuthor): void {
     this.authorsService.deleteAuthor(author).subscribe((res) => {
       for (let i = 0; i < this.authors.length; i++) {
         if (this.authors[i] === author) {
-          this.authors.splice(i, 1)
-          this.getPage(this.page)
+          this.authors.splice(i, 1);
+          this.getPage(this.page);
         }
       }
-      this.alertService.success("Author is delete", false)
-    }, 
+      this.alertService.success('Author is delete', false);
+    },
     (err) => {
-      console.log(err)
-      this.alertService.error("Wrong data", false)
-    })
+      console.log(err);
+      this.alertService.error('Wrong data', false);
+    });
   }
 
 }
