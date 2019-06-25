@@ -74,8 +74,7 @@ export class AllBooksComponent implements OnInit {
 
   private searchByTitle(title: string): void {
     if (title === '') {
-      this.getBooks();
-      this.getPage(1);
+      this.clearFilter();
     }
     this.booksService.searchByTitle({title}).subscribe((res) => {
       this.books = res;
@@ -88,8 +87,7 @@ export class AllBooksComponent implements OnInit {
 
   private searchByAuthor(author: string): void {
     if (author === '') {
-      this.getBooks();
-      this.getPage(1);
+      this.clearFilter();
     }
     this.booksService.searchByAuthor({author}).subscribe((res) => {
       this.books = res;
@@ -102,8 +100,7 @@ export class AllBooksComponent implements OnInit {
 
   private searchByType(type: string): void {
     if (type === '') {
-      this.getBooks();
-      this.getPage(1);
+      this.clearFilter();
     }
     this.booksService.searchByType({type}).subscribe((res) => {
       this.books = res;
@@ -133,8 +130,7 @@ export class AllBooksComponent implements OnInit {
     }
 
     if (!min && !max) {
-      this.getBooks();
-      this.getPage(1);
+      this.clearFilter();
     }
     const price = {
       min: min,

@@ -11,10 +11,12 @@ import { BookModule } from './book/book.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthorsModule } from './authors/authors.module';
 import { UsersModule } from './users/users.module';
+// Enviromets
+import { environment } from './enviroments/environment';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/bookShop'),
+    MongooseModule.forRoot(`${environment.mongodb.databaseURL}`),
     BookModule,
     AuthModule,
     AuthorsModule,

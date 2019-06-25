@@ -40,6 +40,19 @@ export class AuthService {
         }
     }
 
+    public async findUserByEmail(userEmail: string): Promise<boolean> {
+        const user = await this.authModel.findOne({userEmail: userEmail});
+
+        if (user === null) {
+            return true;
+        } else {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                error: 'Email allready in use',
+            }, 403);
+        }
+    }
+
     public async findUserByName(username: string): Promise<IAuth> {
         const user = await this.authModel.findOne({userName: username});
         if (user === null) {

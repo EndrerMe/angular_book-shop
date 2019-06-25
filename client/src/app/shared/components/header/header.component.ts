@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
     if (localStorage.getItem('currentUser')) {
       this.userName = JSON.parse(localStorage.getItem('currentUser')).userName;
       this.userId = JSON.parse(localStorage.getItem('currentUser')).id;
-      console.log(this.userName);
       this.visibility = true;
     } else {
       this.visibility = false;

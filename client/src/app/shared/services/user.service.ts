@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 // Interfaces
 import { IUser } from 'src/app/shared/interfaces';
+// Models
+import { PaginationModel } from 'src/app/shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  public paging(paging): Observable<IUser[]> {
+  public paging(paging: PaginationModel): Observable<IUser[]> {
     return this.http.post<IUser[]>(`${environment.mongodb.databaseURL}/users/paging`, paging);
   }
 
