@@ -75,7 +75,7 @@ export class AuthorsService {
         if (!isAuthor) {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
-                error: 'Password is worng',
+                error: 'Password is wrong',
             }, 404);
         }
 

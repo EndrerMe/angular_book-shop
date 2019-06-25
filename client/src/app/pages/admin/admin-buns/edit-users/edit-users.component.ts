@@ -129,7 +129,7 @@ export class EditUsersComponent implements OnInit {
     });
   }
 
-  private radioGengre(event: any) {
+  private radioGengre(event: any): void {
     this.genderOfTheUser = event.target.value;
   }
 
