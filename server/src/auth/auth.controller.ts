@@ -18,12 +18,13 @@ export class AuthController {
     @Post('createUser')
     public async createUser(@Body() user: IAuth): Promise<IAuth> {
         const checkUserByName = await this.authService.findUserByNameForRegist(user.userName);
-        if (checkUserByName) {
+        const checkByEmail = await this.authService.findUserByEmail(user.userEmail);
+        if (checkUserByName && checkByEmail) {
             return this.authService.create(user);
         } else {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,
-                error: 'Password is worng',
+                error: 'Password is wrong',
             }, 403);
         }
     }
