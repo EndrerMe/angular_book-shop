@@ -115,7 +115,6 @@ export class EditUsersComponent implements OnInit {
   }
 
   public getPage(page: number): void {
-    console.log(page);
     const paging = {
       currentPage: page
     };
@@ -142,7 +141,6 @@ export class EditUsersComponent implements OnInit {
   }
 
   private deleteUser(user: IUser): void {
-    console.log(user);
     this.userService.deleteUser(user).subscribe();
     for (let i = 0; i < this.users.length; i++) {
       if (user.id === this.users[i].id) {
@@ -161,7 +159,6 @@ export class EditUsersComponent implements OnInit {
       this.changeForm.value.id = this.userForChange.id;
       this.userForChange = this.changeForm.value;
       this.userForChange.userGender = this.genderOfTheUser;
-      console.log(this.userForChange);
       this.userService.changeUser(this.userForChange).subscribe((res) => {
         console.log(res);
         this.alertService.success('User is change');

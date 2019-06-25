@@ -161,7 +161,6 @@ export class EditBooksComponent implements OnInit {
     };
     this.authorsService.addNewAuthor(author).subscribe((res) => {
       this.authors.push(res);
-      console.log(this.authors);
       this.newAuthorModalVisibility = false;
       this.alertService.success('Author is added');
     },
